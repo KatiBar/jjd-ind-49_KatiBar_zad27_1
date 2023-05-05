@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="header">
+    <div class="header-text">
+        <a href="/">
+            <h2>Zarządzanie użytkownikami</h2>
+        </a>
+    </div>
+
+</div>
+<div class="content">
+    <form class="needs-validation" novalidate th:method="post" th:action="|/home|" th:object="${newUser}">
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Imię</label>
+                <input type="text" class="form-control" id="validationCustom01" th:field = "*{firstName}" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom02">Nazwisko</label>
+                <input type="text" class="form-control" id="validationCustom02" th:field = "*{lastName}" required>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom03">Data urodzenia</label>
+            <input type="date" class="form-control" id="validationCustom03" th:field = "*{birthday}" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit form</button>
+    </form>
+
+    <div class="list-group" th:each="user: ${users}">
+        <a class="list-group-item list-group-item-action active" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1" th:text="|${user.getFirstName()}|">Imię</h5>
+                <h5 class="mb-1" th:text="|${user.getLastName()}|">Nazwisko</h5>
+                <h5 class="mb-1" th:text="|${user.getBirthday()}|">Data urodzenia</h5>
+            </div>
+        </a>
+    </div>
+</div>
+
+<footer th:include="fragments :: footer">
+
+</footer>
+</body>
+</html>
